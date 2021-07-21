@@ -99,7 +99,9 @@ class Login extends StatelessWidget {
               GradientButton(
                 height: getScreenHeight(60),
                 width: double.infinity,
-                press: () {},
+                press: () {
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
                 text: "Login",
               ),
               SizedBox(height: getScreenHeight(30)),
