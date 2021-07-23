@@ -39,7 +39,7 @@ class CustomBottomNav extends StatelessWidget {
                   color: Menu.home == selectedMenu ? CWHITE : inActiveIconColor,
                 ),
                 onPressed: () =>
-                    Navigator.pushReplacementNamed(context, '/dashboard'),
+                    Navigator.pushReplacementNamed(context, '/home'),
               ),
               IconButton(
                   icon: Icon(
@@ -65,9 +65,13 @@ class CustomBottomNav extends StatelessWidget {
                     color:
                         Menu.skins == selectedMenu ? CWHITE : inActiveIconColor,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/skins');
+                  }),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/profile');
+                },
                 child: Image.asset(
                   "assets/images/user.png",
                   height: 33,

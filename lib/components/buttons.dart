@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:slinkshot_app/size_config.dart';
 import 'package:slinkshot_app/utils/colours.dart';
 
 class GradientButton extends StatelessWidget {
@@ -48,8 +47,10 @@ class UnicornOutlineButton extends StatelessWidget {
   final Widget _child;
   final VoidCallback _callback;
   final double _radius;
+  final double height;
 
   UnicornOutlineButton({
+    required this.height,
     @required double? strokeWidth,
     @required double? radius,
     @required Gradient? gradient,
@@ -73,14 +74,8 @@ class UnicornOutlineButton extends StatelessWidget {
           onTap: _callback,
           child: Container(
             width: double.infinity,
-            height: getScreenHeight(60),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _child,
-              ],
-            ),
+            height: height,
+            child: _child,
           ),
         ),
       ),

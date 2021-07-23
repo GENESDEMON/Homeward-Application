@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slinkshot_app/components/bottom_nav.dart';
+import 'package:slinkshot_app/components/post_card.dart';
 import 'package:slinkshot_app/enum.dart';
+import 'package:slinkshot_app/models/posts.dart';
 import 'package:slinkshot_app/size_config.dart';
 import 'package:slinkshot_app/utils/colours.dart';
 
@@ -83,26 +85,108 @@ class Home extends StatelessWidget {
                           indicatorColor: CPEACH,
                           tabs: [
                             Tab(child: Text("All videos")),
-                            Tab(child: Text("Following")),
+                            Tab(child: Text("GTA V")),
                             Tab(child: Text("COD Mobile")),
                             Tab(child: Text("Apex Legends")),
                             Tab(child: Text("Red Dead II")),
                           ]),
                       Expanded(
-                        child: TabBarView(
-                          children: [
-                            Text("height"),
-                            Text("height"),
-                            Text("height"),
-                            Text("height"),
-                            Text("height"),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 30),
+                          child: TabBarView(
+                            children: [
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: getScreenHeight(30)),
+                                    ...List.generate(
+                                      posts.length,
+                                      (index) {
+                                        return PostCard(post: posts[index]);
+                                        return SizedBox
+                                            .shrink(); // here by default width and height is 0
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: getScreenHeight(30)),
+                                    ...List.generate(
+                                      posts.length,
+                                      (index) {
+                                        if (posts[index].game_name == 'GTA V')
+                                          return PostCard(post: posts[index]);
+                                        return SizedBox
+                                            .shrink(); // here by default width and height is 0
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: getScreenHeight(30)),
+                                    ...List.generate(
+                                      posts.length,
+                                      (index) {
+                                        if (posts[index].game_name ==
+                                            'COD Mobile')
+                                          return PostCard(post: posts[index]);
+                                        return SizedBox
+                                            .shrink(); // here by default width and height is 0
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: getScreenHeight(30)),
+                                    ...List.generate(
+                                      posts.length,
+                                      (index) {
+                                        if (posts[index].game_name == 'Apex')
+                                          return PostCard(post: posts[index]);
+                                        return SizedBox
+                                            .shrink(); // here by default width and height is 0
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Center(
+                                  child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.emoji_emotions,
+                                    color: CWHITE,
+                                    size: 100,
+                                  ),
+                                  SizedBox(height: getScreenHeight(20)),
+                                  Text(
+                                    "Oooops looks like there is no feed here",
+                                    style: GoogleFonts.roboto(
+                                      color: CWHITE,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                            ],
+                          ),
                         ),
                       )
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

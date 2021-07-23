@@ -32,6 +32,7 @@ dependencies:
   google_fonts: 
   font_awesome_flutter: 
   sticky_headers:
+  video_player:
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/videos/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

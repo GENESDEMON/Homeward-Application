@@ -106,6 +106,7 @@ class Login extends StatelessWidget {
               ),
               SizedBox(height: getScreenHeight(30)),
               UnicornOutlineButton(
+                height: 60,
                 strokeWidth: 3,
                 radius: 34,
                 gradient: LinearGradient(
@@ -114,6 +115,7 @@ class Login extends StatelessWidget {
                   end: Alignment.bottomCenter,
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       FontAwesomeIcons.google,
