@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slinkshot_app/components/bottom_nav.dart';
 import 'package:slinkshot_app/components/post_card.dart';
+import 'package:slinkshot_app/components/vid_card.dart';
 import 'package:slinkshot_app/enum.dart';
 import 'package:slinkshot_app/models/posts.dart';
 import 'package:slinkshot_app/size_config.dart';
@@ -98,6 +99,8 @@ class Home extends StatelessWidget {
                               SingleChildScrollView(
                                 child: Column(
                                   children: [
+                                    SizedBox(height: getScreenHeight(30)),
+                                    VidCard(),
                                     SizedBox(height: getScreenHeight(30)),
                                     ...List.generate(
                                       posts.length,

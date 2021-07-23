@@ -88,26 +88,24 @@ class Skins extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: getScreenHeight(30)),
+                SizedBox(height: getScreenHeight(10)),
                 SingleChildScrollView(
-                  child: Container(
-                    height: getScreenHeight(900),
-                    child: GridView.count(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      children: [
-                        ...List.generate(
-                          skins.length,
-                          (index) {
-                            return SkinCard(skin: skins[index]);
-                            // here by default width and height is 0
-                          },
-                        ),
-                      ],
-                    ),
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      ...List.generate(
+                        skins.length,
+                        (index) {
+                          return SkinCard(
+                            skin: skins[index],
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),

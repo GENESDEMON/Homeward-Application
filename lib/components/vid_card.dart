@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:slinkshot_app/components/buttons.dart';
-import 'package:slinkshot_app/models/posts.dart';
 import 'package:slinkshot_app/size_config.dart';
 import 'package:slinkshot_app/utils/colours.dart';
+import 'package:video_player/video_player.dart';
 
-class PostCard extends StatelessWidget {
-  const PostCard({Key? key, required this.post}) : super(key: key);
-  final Posts post;
+class VidCard extends StatefulWidget {
+  const VidCard({Key? key}) : super(key: key);
+
+  @override
+  _VidCardState createState() => _VidCardState();
+}
+
+class _VidCardState extends State<VidCard> {
+  VideoPlayerController? _controller;
+  Future<void>? _initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    _controller = VideoPlayerController.asset('assets/videos/vid1.mp4');
+    _initializeVideoPlayerFuture = _controller!.initialize();
+    _controller!.setLooping(true);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller!.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,13 +57,13 @@ class PostCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(
-                      post.user_image,
+                      "assets/images/skin2.png",
                       height: 50,
                       width: 50,
                     ),
                     SizedBox(width: getScreenWidth(21)),
                     Text(
-                      post.user,
+                      "yenyenyen test",
                       style: GoogleFonts.roboto(
                         color: CWHITE,
                         fontWeight: FontWeight.w500,
@@ -51,10 +75,57 @@ class PostCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Image.asset(
-                post.image,
-                height: getScreenHeight(290),
-                width: double.infinity,
+              SizedBox(
+                height: getScreenHeight(40),
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 200,
+                    child: FutureBuilder(
+                      future: _initializeVideoPlayerFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          return AspectRatio(
+                            aspectRatio: _controller!.value.aspectRatio,
+                            child: VideoPlayer(_controller!),
+                          );
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (_controller!.value.isPlaying) {
+                          _controller!.pause();
+                        } else {
+                          _controller!.play();
+                        }
+                      });
+                    },
+                    child: Container(
+                      height: getScreenHeight(50),
+                      width: getScreenWidth(50),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50), color: CASH),
+                      child: Icon(
+                        _controller!.value.isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                        color: CWHITE,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: getScreenHeight(35),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -63,7 +134,7 @@ class PostCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      post.game_name,
+                      "Apex",
                       style: GoogleFonts.roboto(
                         color: CWHITE,
                         fontWeight: FontWeight.w500,
@@ -117,7 +188,7 @@ class PostCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          post.details,
+                          "37 Seconds of greatness! I lost though but this was a very sick shot. Snipped him right from behind!!!!",
                           style: GoogleFonts.roboto(
                             color: CWHITE,
                             fontWeight: FontWeight.w400,
@@ -135,7 +206,7 @@ class PostCard extends StatelessWidget {
                             size: 13,
                           ),
                           Text(
-                            post.views,
+                            "67",
                             style: GoogleFonts.roboto(
                               color: CWHITE,
                               fontWeight: FontWeight.w500,
@@ -149,7 +220,7 @@ class PostCard extends StatelessWidget {
                             size: 13,
                           ),
                           Text(
-                            post.likes,
+                            "890",
                             style: GoogleFonts.roboto(
                               color: CWHITE,
                               fontWeight: FontWeight.w500,
@@ -163,7 +234,7 @@ class PostCard extends StatelessWidget {
                             size: 13,
                           ),
                           Text(
-                            post.comments,
+                            "10",
                             style: GoogleFonts.roboto(
                               color: CWHITE,
                               fontWeight: FontWeight.w500,

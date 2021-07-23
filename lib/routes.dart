@@ -4,6 +4,7 @@ import 'package:slinkshot_app/view/auth/login.dart';
 import 'package:slinkshot_app/view/tabs/home.dart';
 import 'package:slinkshot_app/view/tabs/profile.dart';
 import 'package:slinkshot_app/view/tabs/skins.dart';
+import 'package:slinkshot_app/view/tabs/test.dart';
 
 import 'components/skin_details.dart';
 
@@ -14,4 +15,5 @@ var routes = <String, WidgetBuilder>{
   '/profile': (BuildContext context) => new Profile(),
   '/skins': (BuildContext context) => new Skins(),
   '/skindetails': (BuildContext context) => new SkinDetails(),
+  '/test': (BuildContext context) => new VideoPlayerApp(),
 };
